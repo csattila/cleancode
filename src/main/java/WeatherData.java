@@ -12,6 +12,10 @@ public class WeatherData {
         }
     }
 
+    public int getDay() {
+        return day;
+    }
+
     public int getMinMaxDiff(){
         return max - min;
     }
