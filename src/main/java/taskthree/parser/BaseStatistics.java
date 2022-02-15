@@ -30,10 +30,21 @@ public abstract class BaseStatistics {
         return items.stream().min(Comparator.comparing(DataItem::getDiff)).get().getItemKey();
     }
 
+    protected void log(String msg){
+        System.out.println(msg);
+    }
+
+    private boolean isNotValidLine(String line){
+        return (line.length() < 2 || line.contains(invalidLineFilter));
+    }
+
+    private boolean isHeader(String line){
+        return line.contains(headerFilter);
+    }
+
     private List<String> readLines() {
         List<String> result = new ArrayList<>();
         try (BufferedReader br = Files.newBufferedReader(path)) {
-            int i = 0;
             String line;
             while ((line = br.readLine()) != null) {
                 if(isHeader(line) || isNotValidLine(line)){
@@ -48,18 +59,6 @@ public abstract class BaseStatistics {
             throw new IllegalArgumentException("Error in readLines: " + e.getMessage());
         }
         return result;
-    }
-
-    protected void log(String msg){
-        System.out.println(msg);
-    }
-
-    private boolean isNotValidLine(String line){
-        return (line.length() < 2 || line.contains(invalidLineFilter));
-    }
-
-    private boolean isHeader(String line){
-        return line.contains(headerFilter);
     }
 
 }
