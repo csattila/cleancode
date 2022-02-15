@@ -1,26 +1,27 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class FootballResult {
 
-    private String path;
+    private Path path;
 
-    public FootballResult(String path) {
+    public FootballResult(Path path) {
         this.path = path;
     }
 
-    public Team getSmallestGoalDiff() throws IOException {
+    public Team getSmallestGoalDiff() {
         List<String> lines = readLines();
         List<Team> teams = parseLines(lines);
         return teams.stream().min(Comparator.comparing(Team::getGoalDiffForAndAgainst)).orElse(null);
     }
 
     private boolean isNotValidLine(String line){
-        return (line.length() < 2 || line.contains("Dy") || line.contains("mo"));
+        return (line.length() < 2 || line.contains("---"));
     }
 
     private boolean isHeader(String line){
@@ -31,9 +32,9 @@ public class FootballResult {
         System.out.println(msg);
     }
 
-    private List<String> readLines() throws IOException {
+    private List<String> readLines() {
         List<String> result = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = Files.newBufferedReader(path)) {
             int i = 0;
             String line;
             while ((line = br.readLine()) != null) {
@@ -44,7 +45,10 @@ public class FootballResult {
                 log(line);
                 result.add(line);
             }
-
+        } catch (IOException e){
+            log("Error in readLines: " + e.getMessage());
+            e.printStackTrace();
+            throw new IllegalArgumentException("Error in readLines: " + e.getMessage());
         }
         return result;
     }
@@ -53,6 +57,7 @@ public class FootballResult {
         List<Team> result = new ArrayList<>();
         for (String line : lines) {
             Team team = new Team(line);
+            log(team.toString());
             result.add(team);
         }
         return result;

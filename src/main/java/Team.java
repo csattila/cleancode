@@ -17,7 +17,7 @@ public class Team {
     }
 
     public int getGoalDiffForAndAgainst(){
-        return goalFor-goalAgainst;
+        return Math.abs(goalAgainst-goalFor);
     }
 
     @Override
