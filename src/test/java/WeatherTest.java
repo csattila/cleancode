@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import tasktwo.FileParser;
+import tasktwo.WeatherData;
 
 import java.io.IOException;
 

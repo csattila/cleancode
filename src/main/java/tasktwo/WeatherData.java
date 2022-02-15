@@ -1,3 +1,5 @@
+package tasktwo;
+
 public class WeatherData {
     private int day;
     private int max;
@@ -22,7 +24,7 @@ public class WeatherData {
 
     @Override
     public String toString() {
-        return "WeatherData{" +
+        return "tasktwo.WeatherData{" +
                 "day=" + day +
                 ", max=" + max +
                 ", min=" + min +

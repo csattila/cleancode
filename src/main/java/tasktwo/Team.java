@@ -1,3 +1,5 @@
+package tasktwo;
+
 public class Team {
     private String name;
     private int goalFor;
@@ -22,7 +24,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
+        return "tasktwo.Team{" +
                 "name='" + name + '\'' +
                 ", goalFor=" + goalFor +
                 ", goalAgainst=" + goalAgainst +

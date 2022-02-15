@@ -1,3 +1,4 @@
+package tasktwo;
 
 public class Weather {
     private static final String FILE_PATH = "src/main/resources/datamunging/weather.dat";
