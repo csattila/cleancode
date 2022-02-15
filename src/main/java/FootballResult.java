@@ -41,7 +41,6 @@ public class FootballResult {
                 if(isHeader(line) || isNotValidLine(line)){
                     continue;
                 }
-                line = line.replaceAll("\\*", "");
                 log(line);
                 result.add(line);
             }
